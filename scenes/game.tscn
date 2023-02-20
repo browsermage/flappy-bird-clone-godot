@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbc8qyrawd4ne"]
+
+[ext_resource type="Script" path="res://scripts/ParallaxLayer.gd" id="1_iw8i2"]
+[ext_resource type="Texture2D" uid="uid://cdvl8bpy6tx17" path="res://sprites/background-cloud.png" id="2_sh0mg"]
+[ext_resource type="Texture2D" uid="uid://7wvvdnqqkg3w" path="res://sprites/background-day.png" id="3_7jktf"]
+[ext_resource type="Texture2D" uid="uid://br1ipty0hju2g" path="res://sprites/ground.png" id="4_yxprs"]
+[ext_resource type="Texture2D" uid="uid://bi7s3ivaif8vl" path="res://sprites/bird.png" id="5_r88rl"]
+[ext_resource type="Script" path="res://scripts/PipeSpawner.gd" id="6_slsbi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2yoq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv2mo"]
+size = Vector2(288, 58)
+
+[node name="Game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayerClouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(288, 0)
+script = ExtResource("1_iw8i2")
+SPEED = -20
+
+[node name="Background-cloud" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerClouds"]
+texture_filter = 1
+position = Vector2(288, 256)
+texture = ExtResource("2_sh0mg")
+
+[node name="ParallaxLayerTrees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(288, 0)
+script = ExtResource("1_iw8i2")
+SPEED = -40
+
+[node name="Background-day" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerTrees"]
+texture_filter = 1
+position = Vector2(288, 256)
+texture = ExtResource("3_7jktf")
+
+[node name="ParallaxLayerGround" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+z_as_relative = false
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(288, 0)
+script = ExtResource("1_iw8i2")
+SPEED = -60
+
+[node name="Ground" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerGround"]
+texture_filter = 1
+position = Vector2(288, 456)
+texture = ExtResource("4_yxprs")
+
+[node name="Bird" type="CharacterBody2D" parent="."]
+z_index = 2
+position = Vector2(144, 220)
+
+[node name="Sprite" type="Sprite2D" parent="Bird"]
+texture_filter = 1
+texture = ExtResource("5_r88rl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird"]
+shape = SubResource("RectangleShape2D_p2yoq")
+debug_color = Color(1, 0, 0.101961, 0.419608)
+
+[node name="PipeSpawner" type="Marker2D" parent="."]
+position = Vector2(313, 0)
+gizmo_extents = 31.0
+script = ExtResource("6_slsbi")
+
+[node name="SpawnTimer" type="Timer" parent="PipeSpawner"]
+wait_time = 3.0
+
+[node name="CollisionAreaTop" type="Area2D" parent="."]
+position = Vector2(1, -457)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaTop"]
+position = Vector2(143, 429)
+shape = SubResource("RectangleShape2D_rv2mo")
+
+[node name="CollisionAreaBottom" type="Area2D" parent="."]
+
+[node name="Ground" type="Sprite2D" parent="CollisionAreaBottom"]
+texture_filter = 1
+position = Vector2(288, 456)
+texture = ExtResource("4_yxprs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaBottom"]
+position = Vector2(143, 429)
+shape = SubResource("RectangleShape2D_rv2mo")
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 1
+
+[node name="ParallaxLayerGround" type="ParallaxLayer" parent="ParallaxForeground"]
+z_as_relative = false
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(288, 0)
+script = ExtResource("1_iw8i2")
+SPEED = -60
