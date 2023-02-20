@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://klpok57y3wxg"]
+[gd_scene load_steps=6 format=3 uid="uid://bs54wkfem7kab"]
 
 [ext_resource type="Script" path="res://scripts/PipePair.gd" id="1_squ6k"]
+[ext_resource type="Script" path="res://scripts/Collision.gd" id="2_4spa7"]
 [ext_resource type="Texture2D" uid="uid://d1yw0t1kcqwoa" path="res://sprites/pipe-top.png" id="2_p1y8j"]
 [ext_resource type="Texture2D" uid="uid://bw3x3f2w1qy8" path="res://sprites/pipe-bottom.png" id="3_1vbnq"]
 
@@ -11,6 +12,8 @@ size = Vector2(46, 303)
 script = ExtResource("1_squ6k")
 
 [node name="TopPipe" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("2_4spa7")
 
 [node name="Pipe-top" type="Sprite2D" parent="TopPipe"]
 texture_filter = 1
@@ -22,6 +25,8 @@ shape = SubResource("RectangleShape2D_gq0vp")
 
 [node name="BottomPipe" type="Area2D" parent="."]
 position = Vector2(0, 320)
+collision_layer = 0
+script = ExtResource("2_4spa7")
 
 [node name="Pipe-bottom" type="Sprite2D" parent="BottomPipe"]
 texture_filter = 1

@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbc8qyrawd4ne"]
+[gd_scene load_steps=11 format=3 uid="uid://c4av6fqxn46th"]
 
-[ext_resource type="Script" path="res://scripts/ParallaxLayer.gd" id="1_iw8i2"]
-[ext_resource type="Texture2D" uid="uid://cdvl8bpy6tx17" path="res://sprites/background-cloud.png" id="2_sh0mg"]
-[ext_resource type="Texture2D" uid="uid://7wvvdnqqkg3w" path="res://sprites/background-day.png" id="3_7jktf"]
-[ext_resource type="Texture2D" uid="uid://br1ipty0hju2g" path="res://sprites/ground.png" id="4_yxprs"]
-[ext_resource type="Texture2D" uid="uid://bi7s3ivaif8vl" path="res://sprites/bird.png" id="5_r88rl"]
-[ext_resource type="Script" path="res://scripts/PipeSpawner.gd" id="6_slsbi"]
+[ext_resource type="Script" path="res://scripts/ParallaxLayer.gd" id="1_5mnh4"]
+[ext_resource type="Texture2D" uid="uid://cdvl8bpy6tx17" path="res://sprites/background-cloud.png" id="2_b6xu0"]
+[ext_resource type="Texture2D" uid="uid://7wvvdnqqkg3w" path="res://sprites/background-day.png" id="3_3aaxc"]
+[ext_resource type="Texture2D" uid="uid://br1ipty0hju2g" path="res://sprites/ground.png" id="4_lk17a"]
+[ext_resource type="Script" path="res://scripts/Bird.gd" id="5_2rmyn"]
+[ext_resource type="Texture2D" uid="uid://bi7s3ivaif8vl" path="res://sprites/bird.png" id="5_daa1o"]
+[ext_resource type="Script" path="res://scripts/PipeSpawner.gd" id="6_wbhhr"]
+[ext_resource type="Script" path="res://scripts/Collision.gd" id="8_83v12"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2yoq"]
 
@@ -19,45 +21,47 @@ size = Vector2(288, 58)
 [node name="ParallaxLayerClouds" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(288, 0)
-script = ExtResource("1_iw8i2")
+script = ExtResource("1_5mnh4")
 SPEED = -20
 
 [node name="Background-cloud" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerClouds"]
 texture_filter = 1
 position = Vector2(288, 256)
-texture = ExtResource("2_sh0mg")
+texture = ExtResource("2_b6xu0")
 
 [node name="ParallaxLayerTrees" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(288, 0)
-script = ExtResource("1_iw8i2")
+script = ExtResource("1_5mnh4")
 SPEED = -40
 
 [node name="Background-day" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerTrees"]
 texture_filter = 1
 position = Vector2(288, 256)
-texture = ExtResource("3_7jktf")
+texture = ExtResource("3_3aaxc")
 
 [node name="ParallaxLayerGround" type="ParallaxLayer" parent="ParallaxBackground"]
 visible = false
 z_as_relative = false
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(288, 0)
-script = ExtResource("1_iw8i2")
+script = ExtResource("1_5mnh4")
 SPEED = -60
 
 [node name="Ground" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerGround"]
 texture_filter = 1
 position = Vector2(288, 456)
-texture = ExtResource("4_yxprs")
+texture = ExtResource("4_lk17a")
 
 [node name="Bird" type="CharacterBody2D" parent="."]
 z_index = 2
 position = Vector2(144, 220)
+collision_mask = 2
+script = ExtResource("5_2rmyn")
 
 [node name="Sprite" type="Sprite2D" parent="Bird"]
 texture_filter = 1
-texture = ExtResource("5_r88rl")
+texture = ExtResource("5_daa1o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bird"]
 shape = SubResource("RectangleShape2D_p2yoq")
@@ -66,24 +70,28 @@ debug_color = Color(1, 0, 0.101961, 0.419608)
 [node name="PipeSpawner" type="Marker2D" parent="."]
 position = Vector2(313, 0)
 gizmo_extents = 31.0
-script = ExtResource("6_slsbi")
+script = ExtResource("6_wbhhr")
 
 [node name="SpawnTimer" type="Timer" parent="PipeSpawner"]
 wait_time = 3.0
 
 [node name="CollisionAreaTop" type="Area2D" parent="."]
 position = Vector2(1, -457)
+collision_layer = 0
+script = ExtResource("8_83v12")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaTop"]
 position = Vector2(143, 429)
 shape = SubResource("RectangleShape2D_rv2mo")
 
 [node name="CollisionAreaBottom" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("8_83v12")
 
 [node name="Ground" type="Sprite2D" parent="CollisionAreaBottom"]
 texture_filter = 1
 position = Vector2(288, 456)
-texture = ExtResource("4_yxprs")
+texture = ExtResource("4_lk17a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaBottom"]
 position = Vector2(143, 429)
@@ -96,5 +104,5 @@ layer = 1
 z_as_relative = false
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(288, 0)
-script = ExtResource("1_iw8i2")
+script = ExtResource("1_5mnh4")
 SPEED = -60
