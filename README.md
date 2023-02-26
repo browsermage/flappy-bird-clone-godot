@@ -3,7 +3,7 @@
 I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter [@colorsofcode](https://twitter.com/colorsofcode)
 
 <div align="center">
-   <img src="./art/godot_flappy_bird_godot.gif" width="282" height="555">
+   <img src="./art/godot_flappy_bird_godot.gif" width="933" height="630">
 </div>
 
 <!-- ABOUT -->
