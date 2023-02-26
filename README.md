@@ -6,6 +6,8 @@ I like combining the web stack and game development, if you like what you see pl
    <img src="./art/godot_flappy_bird_godot.gif" width="933" height="630">
 </div>
 
+<meta property="og:image" content="https://github.com/colorsofcode/flappy-bird-clone-godot/raw/main/art/social.png" />
+
 <!-- ABOUT -->
 ## About The Project
 
