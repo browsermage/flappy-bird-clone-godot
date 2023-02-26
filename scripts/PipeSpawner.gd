@@ -1,13 +1,13 @@
 extends Marker2D
 
-@onready var SpawnTimer = get_node("SpawnTimer")
+@onready var SpawnTimer = $SpawnTimer
 
 var PipePair = preload("res://scenes/PipePair.tscn")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	start_spawner()
+	GameManager.connect("state_changed", _check_spawning_pipes)
+	#start_spawner()
 
 func _spawn():
 	var instance = PipePair.instantiate()
@@ -20,4 +20,10 @@ func start_spawner():
 	
 func stop_spawner():
 	SpawnTimer.stop()
+	
+func _check_spawning_pipes():
+		if GameManager.STATE.RUNNING == GameManager.current_state:
+			start_spawner()
+		else:
+			stop_spawner()
 	

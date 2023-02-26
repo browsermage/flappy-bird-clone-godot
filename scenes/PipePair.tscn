@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs54wkfem7kab"]
+[gd_scene load_steps=8 format=3 uid="uid://bcbwfl6bjway6"]
 
 [ext_resource type="Script" path="res://scripts/PipePair.gd" id="1_squ6k"]
 [ext_resource type="Script" path="res://scripts/Collision.gd" id="2_4spa7"]
 [ext_resource type="Texture2D" uid="uid://d1yw0t1kcqwoa" path="res://sprites/pipe-top.png" id="2_p1y8j"]
 [ext_resource type="Texture2D" uid="uid://bw3x3f2w1qy8" path="res://sprites/pipe-bottom.png" id="3_1vbnq"]
+[ext_resource type="AudioStream" uid="uid://drow7gaegg4qv" path="res://sounds/point.wav" id="5_0006r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gq0vp"]
-size = Vector2(46, 303)
+size = Vector2(46, 304.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uo0rq"]
+size = Vector2(20, 627)
 
 [node name="PipePair" type="CanvasGroup"]
 script = ExtResource("1_squ6k")
@@ -33,9 +37,19 @@ texture_filter = 1
 texture = ExtResource("3_1vbnq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
-position = Vector2(0, 2)
+position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_gq0vp")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(1.22786e-06, 160.5)
 scale = Vector2(2.6, 31.35)
+
+[node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2(42, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(-28, 160)
+shape = SubResource("RectangleShape2D_uo0rq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScoreArea"]
+stream = ExtResource("5_0006r")

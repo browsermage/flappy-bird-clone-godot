@@ -15,6 +15,10 @@ run/main_scene="res://scenes/Game.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://sprites/icon.svg"
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
 [display]
 
 window/size/viewport_width=288
@@ -42,5 +46,7 @@ flap={
 
 [rendering]
 
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
 textures/size/viewport_height=648
 textures/size/viewport_width=1152
